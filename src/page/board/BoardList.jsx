@@ -1,13 +1,14 @@
 import { Box, Table, Tbody, Th, Thead, Tr } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 
 export function BoardList() {
   const [boardList, setBoardList] = useState([]);
 
-  // [{id:5, title: "제목1", writer: "누구1"},
-  // {id:5, title: "제목1", writer: "누구1"},
-  // {id:5, title: "제목1", writer: "누구1"}]
+  useEffect(() => {
+    axios.get("/api/board/list").then((res) => setBoardList(res.data));
+  }, []);
 
   return (
     <Box>
@@ -19,7 +20,7 @@ export function BoardList() {
               <Th>#</Th>
               <Th>TITLE</Th>
               <Th>
-                <FontAwesomeIcon icon="fa-solid fa-user" />
+                <FontAwesomeIcon icon={faUserPen} />
               </Th>
             </Tr>
           </Thead>
