@@ -11,7 +11,7 @@ export function Navbar() {
         onClick={() => navigate("/")}
         cursor={"pointer"}
         _hover={{
-          bgColor: "grey.100",
+          bgColor: "grey.200",
         }}
       >
         HOME
