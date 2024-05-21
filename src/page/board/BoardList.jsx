@@ -1,5 +1,6 @@
-import { Box, Table, Tbody, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { faUserPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 
