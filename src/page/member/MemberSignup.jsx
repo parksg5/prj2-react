@@ -55,7 +55,7 @@ export function MemberSignup() {
 
   function handleCheckEmail() {
     axios
-      .get("/api/member/check?email=${email}")
+      .get(`/api/member/check?email=${email}`)
       .then((res) => {
         toast({
           status: "warning",
