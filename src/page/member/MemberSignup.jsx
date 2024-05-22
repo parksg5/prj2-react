@@ -199,7 +199,7 @@ export function MemberSignup() {
               />
               <InputRightElement w={"75px"} mr={1}>
                 <Button
-                  isDisabled={ncikName.trim().length == 0}
+                  isDisabled={nickName.trim().length == 0}
                   size={"sm"}
                   onClick={handleCheckNickName}
                 >
