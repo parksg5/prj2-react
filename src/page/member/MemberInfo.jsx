@@ -11,6 +11,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Spinner,
+  useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -24,6 +25,7 @@ export function MemberInfo() {
   const { id } = useParams();
   const toast = useToast();
   const navigate = useNavigate();
+  const { isOpen, onClose, onOpen } = useDisclosure();
 
   useEffect(() => {
     axios
@@ -95,7 +97,12 @@ export function MemberInfo() {
           </FormControl>
         </Box>
         <Box>
-          <Button colorScheme={"purple"}>수정</Button>
+          <Button
+            onClick={() => navigate(`/member/edit/${member.id}`)}
+            colorScheme={"purple"}
+          >
+            수정
+          </Button>
           <Button colorScheme={"red"} onClick={onOpen}>
             탈퇴
           </Button>
