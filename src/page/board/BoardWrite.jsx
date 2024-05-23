@@ -15,14 +15,13 @@ import { LoginContext } from "../../component/LoginProvider.jsx";
 export function BoardWrite() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [writer, setWriter] = useState("");
-  const [loading, setLoding] = useState(false);
+  const [loading, setLoading] = useState(false);
   const account = useContext(LoginContext);
   const toast = useToast();
   const navigate = useNavigate();
 
   function handleSaveClick() {
-    setLoding(true);
+    setLoading(true);
     axios
       .post(
         "/api/board/add",
@@ -42,7 +41,7 @@ export function BoardWrite() {
           status: "success",
           position: "top",
         });
-        // navigate("/");
+        navigate("/");
       })
       .catch((e) => {
         const code = e.response.status;
@@ -55,7 +54,7 @@ export function BoardWrite() {
           });
         }
       })
-      .finally(() => setLoding(false));
+      .finally(() => setLoading(false));
   }
 
   let disableSaveButton = false;
@@ -87,16 +86,16 @@ export function BoardWrite() {
             <FormLabel>작성자</FormLabel>
             <Input readOnly value={account.nickName} />
           </FormControl>
-          <Box>
-            <Button
-              isLoading={loading}
-              isDisabled={disableSaveButton}
-              clorScheme={"blue"}
-              onClick={handleSaveClick}
-            >
-              저장
-            </Button>
-          </Box>
+        </Box>
+        <Box>
+          <Button
+            isLoading={loading}
+            isDisabled={disableSaveButton}
+            colorScheme={"blue"}
+            onClick={handleSaveClick}
+          >
+            저장
+          </Button>
         </Box>
       </Box>
     </Box>
