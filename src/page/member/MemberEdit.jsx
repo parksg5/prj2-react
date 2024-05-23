@@ -90,7 +90,7 @@ export function MemberEdit() {
         <Box>
           <FormControl>
             <FormLabel>암호 확인</FormLabel>
-            <Input onChange={(e) => e.target.value} />
+            <Input onChange={(e) => setPasswordCheck(e.target.value)} />
             {member.password === passwordCheck || (
               <FormHelperText>암호가 일치하지 않습니다.</FormHelperText>
             )}
@@ -99,7 +99,9 @@ export function MemberEdit() {
         <Box>
           <FormControl>별명</FormControl>
           <Input
-            onChange={(e) => setMember({ ...member, nickName: e.target.value })}
+            onChange={(e) =>
+              setMember({ ...member, nickName: e.target.value.trim() })
+            }
             value={member.nickName}
           />
         </Box>
