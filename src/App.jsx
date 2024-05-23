@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       { path: "edit/:id", element: <BoardEdit /> },
       { path: "signup", element: <MemberSignup /> },
       { path: "member/list", element: <MemberList /> },
-      { path: "member/id", element: <MemberInfo /> },
+      { path: "member/:id", element: <MemberInfo /> },
       { path: "member/edit/:id", element: <MemberEdit /> },
     ],
   },
