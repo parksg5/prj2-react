@@ -31,11 +31,7 @@ export function MemberInfo() {
 
   useEffect(() => {
     axios
-      .get(`/api/member/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+      .get(`/api/member/${id}`)
       .then((res) => setMember(res.data))
       .catch((err) => {
         if (err.response.status === 404) {
@@ -61,9 +57,6 @@ export function MemberInfo() {
 
     axios
       .delete(`/api/member/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
         data: { id, password },
       })
       .then(() => {
