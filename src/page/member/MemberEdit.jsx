@@ -18,7 +18,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { customAxios as axios } from "../../axiosInstance.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 
 export function MemberEdit() {

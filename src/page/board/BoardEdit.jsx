@@ -17,7 +17,7 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import axios from "axios";
+import { customAxios as axios } from "../../axiosInstance.jsx";
 
 export function BoardEdit() {
   const { id } = useParams();

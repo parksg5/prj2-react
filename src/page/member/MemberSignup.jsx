@@ -10,7 +10,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import axios from "axios";
+import { customAxios as axios } from "../../axiosInstance.jsx";
 import { useNavigate } from "react-router-dom";
 
 export function MemberSignup() {
