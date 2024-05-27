@@ -11,10 +11,16 @@ export function BoardList() {
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    axios
-      .get(`/api/board/list?${searchParams}`)
-      .then((res) => setBoardList(res.data));
+    axios.get(`/api/board/list?${searchParams}`).then((res) => {
+      setBoardList(res.data.boardList);
+      setPageInfo(res.data.pageInfo);
+    });
   }, [searchParams]);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= pageInfo.lastPageNumber; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <Box>
@@ -49,7 +55,7 @@ export function BoardList() {
         </Table>
       </Box>
       <Box>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((pageNumber) => (
+        {pageNumbers.map((pageNumber) => (
           <Button
             onClick={() => navigate(`/?page=${pageNumber}`)}
             key={pageNumber}
