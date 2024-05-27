@@ -32,7 +32,7 @@ export function Navbar() {
         </Box>
       )}
       <Spacer />
-      {account.isLoggedIn() && (
+      {account.isAdmin() && (
         <Box
           onClick={() => navigate(`/member/${account.id}`)}
           cursor={"pointer"}

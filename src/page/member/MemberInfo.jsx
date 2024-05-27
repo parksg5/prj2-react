@@ -15,7 +15,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
-import { customAxios as axios } from "../../axiosInstance.jsx";
+import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { LoginContext } from "../../component/LoginProvider.jsx";
 
@@ -31,7 +31,11 @@ export function MemberInfo() {
 
   useEffect(() => {
     axios
-      .get(`/api/member/${id}`)
+      .get(`/api/member/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((res) => setMember(res.data))
       .catch((err) => {
         if (err.response.status === 404) {
@@ -57,6 +61,9 @@ export function MemberInfo() {
 
     axios
       .delete(`/api/member/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
         data: { id, password },
       })
       .then(() => {
@@ -108,17 +115,19 @@ export function MemberInfo() {
             <Input isReadOnly value={member.inserted} type={"datetime-local"} />
           </FormControl>
         </Box>
-        <Box>
-          <Button
-            onClick={() => navigate(`/member/edit/${member.id}`)}
-            colorScheme={"purple"}
-          >
-            수정
-          </Button>
-          <Button colorScheme={"red"} onClick={onOpen}>
-            탈퇴
-          </Button>
-        </Box>
+        {account.hasAccess(member.id) && (
+          <Box>
+            <Button
+              onClick={() => navigate(`/member/edit/${member.id}`)}
+              colorScheme={"purple"}
+            >
+              수정
+            </Button>
+            <Button colorScheme={"red"} onClick={onOpen}>
+              탈퇴
+            </Button>
+          </Box>
+        )}
       </Box>
 
       <Modal isOpen={isOpen} onClose={onClose}>
