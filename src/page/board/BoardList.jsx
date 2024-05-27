@@ -54,33 +54,36 @@ export function BoardList() {
     <Box>
       <Box>게시물 목록</Box>
       <Box>
-        <Table>
-          <Thead>
-            <Tr>
-              <Th>#</Th>
-              <Th>TITLE</Th>
-              <Th>
-                <FontAwesomeIcon icon={faUserPen} />
-              </Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {boardList.map((board) => (
-              <Tr
-                _hover={{
-                  bgColor: "grey.200",
-                }}
-                cursor={"pointer"}
-                onClick={() => navigate(`/board/${board.id}`)}
-                key={board.id}
-              >
-                <Td>{board.id}</Td>
-                <Td>{board.title}</Td>
-                <Td>{board.writer}</Td>
+        {boardList.length === 0 && <Center>조회 결과가 없습니다.</Center>}
+        {boardList.length > 0 && (
+          <Table>
+            <Thead>
+              <Tr>
+                <Th>#</Th>
+                <Th>TITLE</Th>
+                <Th>
+                  <FontAwesomeIcon icon={faUserPen} />
+                </Th>
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
+            </Thead>
+            <Tbody>
+              {boardList.map((board) => (
+                <Tr
+                  _hover={{
+                    bgColor: "grey.200",
+                  }}
+                  cursor={"pointer"}
+                  onClick={() => navigate(`/board/${board.id}`)}
+                  key={board.id}
+                >
+                  <Td>{board.id}</Td>
+                  <Td>{board.title}</Td>
+                  <Td>{board.writer}</Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        )}
       </Box>
       <center>
         <Flex>
