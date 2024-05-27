@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import axios from "axios";
 import {
   Box,
   Button,
@@ -17,7 +18,6 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import { customAxios as axios } from "../../axiosInstance.jsx";
 
 export function BoardEdit() {
   const { id } = useParams();
@@ -32,7 +32,11 @@ export function BoardEdit() {
 
   function handleClickSave() {
     axios
-      .put("/api/board/edit", board)
+      .put("/api/board/edit", board, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then(() => {
         toast({
           status: "success",
