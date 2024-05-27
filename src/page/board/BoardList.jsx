@@ -60,7 +60,7 @@ export function BoardList() {
 
   function handlePageButtonClick(pageNumber) {
     searchParams.set("page", pageNumber);
-    navigate(`/?page=${searchParams}`);
+    navigate(`/?${searchParams}`);
   }
 
   return (
