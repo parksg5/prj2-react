@@ -39,8 +39,7 @@ export function MemberLogin() {
           description: "이메일과 패스워드를 확인해주세요.",
           position: "top",
         });
-      })
-      .finally(() => {});
+      });
   }
 
   return (
