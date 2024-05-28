@@ -157,7 +157,7 @@ export function BoardEdit() {
               multiple
               type="file"
               accept="image/*"
-              onChange={(e) => setFiles(e.target.files)}
+              onChange={(e) => setAddFileList(e.target.files)}
             />
             <FormHelperText>
               총 용량은 10MB, 한 파일은 1MB를 초과할 수 없습니다.
