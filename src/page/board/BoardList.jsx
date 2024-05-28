@@ -1,4 +1,5 @@
 import {
+  Badge,
   Box,
   Button,
   Center,
@@ -18,6 +19,7 @@ import {
   faAngleRight,
   faAnglesLeft,
   faAnglesRight,
+  faImages,
   faMagnifyingGlass,
   faUserPen,
 } from "@fortawesome/free-solid-svg-icons";
@@ -45,7 +47,7 @@ export function BoardList() {
     const typeParam = searchParams.get("type");
     const keywordParam = searchParams.get("keyword");
     if (typeParam) {
-      setSearchKeyword(typeParam);
+      setSearchType(typeParam);
     }
     if (keywordParam) {
       setSearchKeyword(keywordParam);
@@ -86,14 +88,22 @@ export function BoardList() {
               {boardList.map((board) => (
                 <Tr
                   _hover={{
-                    bgColor: "grey.200",
+                    bgColor: "gray.200",
                   }}
                   cursor={"pointer"}
                   onClick={() => navigate(`/board/${board.id}`)}
                   key={board.id}
                 >
                   <Td>{board.id}</Td>
-                  <Td>{board.title}</Td>
+                  <Td>
+                    {board.title}
+                    {board.numberOfImages && (
+                      <Badge>
+                        <FontAwesomeIcon icon={faImages} />
+                        {board.numberOfImages}
+                      </Badge>
+                    )}
+                  </Td>
                   <Td>{board.writer}</Td>
                 </Tr>
               ))}
@@ -101,7 +111,7 @@ export function BoardList() {
           </Table>
         )}
       </Box>
-      <center>
+      <Center>
         <Flex>
           <Box>
             <Select
@@ -126,7 +136,7 @@ export function BoardList() {
             </Button>
           </Box>
         </Flex>
-      </center>
+      </Center>
       <Center>
         {pageInfo.prevPageNumber && (
           <>
