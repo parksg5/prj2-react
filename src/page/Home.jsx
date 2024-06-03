@@ -5,9 +5,15 @@ import { Navbar } from "../component/Navbar.jsx";
 
 export function Home() {
   return (
-    <Box>
+    <Box mb={300}>
       <Navbar />
-      <Box>
+      <Box
+        mx={{
+          base: 0,
+          lg: 200,
+        }}
+        mt={10}
+      >
         <Outlet />
       </Box>
     </Box>

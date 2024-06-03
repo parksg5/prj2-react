@@ -1,8 +1,10 @@
 import {
   Box,
   Button,
+  Center,
   FormControl,
   FormLabel,
+  Heading,
   Input,
   Modal,
   ModalBody,
@@ -95,41 +97,51 @@ export function MemberInfo() {
 
   return (
     <Box>
-      <Box>회원 정보</Box>
-      <Box>
-        <Box>
-          <FormControl>
-            <FormLabel>이메일</FormLabel>
-            <Input isReadOnly value={member.email} />
-          </FormControl>
-        </Box>
-        <Box>
-          <FormControl>
-            <FormLabel>별명</FormLabel>
-            <Input isReadOnly value={member.nickName} />
-          </FormControl>
-        </Box>
-        <Box>
-          <FormControl>
-            <FormLabel>가입일시</FormLabel>
-            <Input isReadOnly value={member.inserted} type={"datetime-local"} />
-          </FormControl>
-        </Box>
-        {account.hasAccess(member.id) && (
-          <Box>
-            <Button
-              onClick={() => navigate(`/member/edit/${member.id}`)}
-              colorScheme={"purple"}
-            >
-              수정
-            </Button>
-            <Button colorScheme={"red"} onClick={onOpen}>
-              탈퇴
-            </Button>
+      <Center>
+        <Box w={500}>
+          <Box mb={10}>
+            <Heading>회원 정보</Heading>
           </Box>
-        )}
-      </Box>
-
+          <Box mb={10}>
+            <Box mb={7}>
+              <FormControl>
+                <FormLabel>이메일</FormLabel>
+                <Input isReadOnly value={member.email} />
+              </FormControl>
+            </Box>
+            <Box mb={7}>
+              <FormControl>
+                <FormLabel>별명</FormLabel>
+                <Input isReadOnly value={member.nickName} />
+              </FormControl>
+            </Box>
+            <Box mb={7}>
+              <FormControl>
+                <FormLabel>가입일시</FormLabel>
+                <Input
+                  isReadOnly
+                  value={member.inserted}
+                  type={"datetime-local"}
+                />
+              </FormControl>
+            </Box>
+            {account.hasAccess(member.id) && (
+              <Box>
+                <Button
+                  mr={2}
+                  onClick={() => navigate(`/member/edit/${member.id}`)}
+                  colorScheme={"purple"}
+                >
+                  수정
+                </Button>
+                <Button colorScheme={"red"} onClick={onOpen}>
+                  탈퇴
+                </Button>
+              </Box>
+            )}
+          </Box>
+        </Box>
+      </Center>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -144,7 +156,9 @@ export function MemberInfo() {
             </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={onClose}>취소</Button>
+            <Button mr={2} onClick={onClose}>
+              취소
+            </Button>
             <Button
               isLoading={isLoading}
               colorScheme={"red"}

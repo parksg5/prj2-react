@@ -4,6 +4,7 @@ import {
   Button,
   Center,
   Flex,
+  Heading,
   Input,
   Select,
   Table,
@@ -72,19 +73,21 @@ export function BoardList() {
 
   return (
     <Box>
-      <Box>게시물 목록</Box>
-      <Box>
+      <Box mb={10}>
+        <Heading>게시물 목록</Heading>
+      </Box>
+      <Box mb={10}>
         {boardList.length === 0 && <Center>조회 결과가 없습니다.</Center>}
         {boardList.length > 0 && (
           <Table>
             <Thead>
               <Tr>
-                <Th>#</Th>
+                <Th w={20}>#</Th>
                 <Th>TITLE</Th>
-                <Th>
+                <Th w={20}>
                   <FontAwesomeIcon icon={faHeart} />
                 </Th>
-                <Th>
+                <Th w={40}>
                   <FontAwesomeIcon icon={faUserPen} />
                 </Th>
               </Tr>
@@ -103,15 +106,23 @@ export function BoardList() {
                   <Td>
                     {board.title}
                     {board.numberOfImages > 0 && (
-                      <Badge>
-                        <FontAwesomeIcon icon={faImages} />
-                        {board.numberOfImages}
+                      <Badge ml={2}>
+                        <Flex gap={1}>
+                          <Box>
+                            <FontAwesomeIcon icon={faImages} />
+                          </Box>
+                          <Box>{board.numberOfImages}</Box>
+                        </Flex>
                       </Badge>
                     )}
                     {board.numberOfComments > 0 && (
-                      <Badge>
-                        <FontAwesomeIcon icon={faComments} />
-                        {board.numberOfComments}
+                      <Badge ml={2}>
+                        <Flex gap={1}>
+                          <Box>
+                            <FontAwesomeIcon icon={faComments} />
+                          </Box>
+                          <Box>{board.numberOfComments}</Box>
+                        </Flex>
                       </Badge>
                     )}
                   </Td>
@@ -123,8 +134,8 @@ export function BoardList() {
           </Table>
         )}
       </Box>
-      <Center>
-        <Flex>
+      <Center mb={10}>
+        <Flex gap={1}>
           <Box>
             <Select
               value={searchType}
@@ -150,43 +161,45 @@ export function BoardList() {
         </Flex>
       </Center>
       <Center>
-        {pageInfo.prevPageNumber && (
-          <>
-            <Button onClick={() => handlePageButtonClick(1)}>
-              <FontAwesomeIcon icon={faAnglesLeft} />
-            </Button>
+        <Flex gap={1}>
+          {pageInfo.prevPageNumber && (
+            <>
+              <Button onClick={() => handlePageButtonClick(1)}>
+                <FontAwesomeIcon icon={faAnglesLeft} />
+              </Button>
+              <Button
+                onClick={() => handlePageButtonClick(pageInfo.prevPageNumber)}
+              >
+                <FontAwesomeIcon icon={faAngleLeft} />
+              </Button>
+            </>
+          )}
+          {pageNumbers.map((pageNumber) => (
             <Button
-              onClick={() => handlePageButtonClick(pageInfo.prevPageNumber)}
+              onClick={() => handlePageButtonClick(pageNumber)}
+              key={pageNumber}
+              colorScheme={
+                pageNumber === pageInfo.currentPageNumber ? "blue" : "gray"
+              }
             >
-              <FontAwesomeIcon icon={faAngleLeft} />
+              {pageNumber}
             </Button>
-          </>
-        )}
-        {pageNumbers.map((pageNumber) => (
-          <Button
-            onClick={() => handlePageButtonClick(pageNumber)}
-            key={pageNumber}
-            colorScheme={
-              pageNumber === pageInfo.currentPageNumber ? "blue" : "gray"
-            }
-          >
-            {pageNumber}
-          </Button>
-        ))}
-        {pageInfo.nextPageNumber && (
-          <>
-            <Button
-              onClick={() => handlePageButtonClick(pageInfo.nextPageNumber)}
-            >
-              <FontAwesomeIcon icon={faAngleRight} />
-            </Button>
-            <Button
-              onClick={() => handlePageButtonClick(pageInfo.lastPageNumber)}
-            >
-              <FontAwesomeIcon icon={faAnglesRight} />
-            </Button>
-          </>
-        )}
+          ))}
+          {pageInfo.nextPageNumber && (
+            <>
+              <Button
+                onClick={() => handlePageButtonClick(pageInfo.nextPageNumber)}
+              >
+                <FontAwesomeIcon icon={faAngleRight} />
+              </Button>
+              <Button
+                onClick={() => handlePageButtonClick(pageInfo.lastPageNumber)}
+              >
+                <FontAwesomeIcon icon={faAnglesRight} />
+              </Button>
+            </>
+          )}
+        </Flex>
       </Center>
     </Box>
   );
